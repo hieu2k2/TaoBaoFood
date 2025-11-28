@@ -1,0 +1,373 @@
+/* =========================================
+   1. CẤU TRÚC CHUNG & BACKGROUND
+   ========================================= */
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    /* Full màn hình */
+    min-height: 600px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+/* Slider ảnh nền */
+.bg-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out, transform 6s linear;
+    transform: scale(1);
+    z-index: 1;
+}
+
+.bg-slide.active {
+    opacity: 1;
+    transform: scale(1.1);
+    /* Hiệu ứng zoom nhẹ */
+}
+
+/* Lớp phủ đen mờ */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+}
+
+/* =========================================
+   2. HIỆU ỨNG CHUYỂN TRANG (SLIDE UP)
+   ========================================= */
+.page-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #111;
+    /* Nền đen */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Chạy từ dưới lên, nhanh lúc đầu, chậm lúc cuối */
+    animation: slideUp 0.8s cubic-bezier(0.87, 0, 0.13, 1) forwards;
+}
+
+.transition-content {
+    opacity: 0;
+    text-align: center;
+    /* Hiện chữ sau khi màn đen đã lên hết */
+    animation: fadeInUp 0.6s ease-out 0.5s forwards;
+}
+
+.transition-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: #ff0000;
+    font-weight: bold;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.transition-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(237, 48, 48, 0.3);
+    border-top: 3px solid #a92a07;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+/* Keyframes */
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* =========================================
+   3. NỘI DUNG (TEXT & BUTTON)
+   ========================================= */
+.hero-content {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+}
+
+.content-wrapper {
+    padding-top: 60px;
+}
+
+.brand-badge {
+    background-color: #d4af37;
+    color: #000;
+    display: inline-block;
+    padding: 5px 15px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.hero-title {
+    font-size: 4.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+}
+
+.gold-text {
+    color: #d4af37;
+    text-shadow: 0px 0px 15px rgba(212, 175, 55, 0.4);
+}
+
+.hero-desc {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    max-width: 500px;
+    color: #ddd;
+    line-height: 1.6;
+}
+
+/* Nút Bấm */
+.btn-gold {
+    background-color: transparent;
+    border: 2px solid #d4af37;
+    color: #d4af37;
+    padding: 12px 35px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 20px;
+}
+
+.btn-gold:hover {
+    background-color: #d4af37;
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================================
+   4. ẢNH MÓN ĂN (BÊN PHẢI)
+   ========================================= */
+.food-circle-container {
+    position: relative;
+    width: 450px;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gold-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgba(212, 55, 55, 0.3);
+    border-radius: 50%;
+    animation: ringSpin 20s linear infinite;
+}
+
+.floating-food {
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes ringSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* =========================================
+   5. RESPONSIVE DESIGN (MOBILE/TABLET)
+   ========================================= */
+
+/* Tablet & Laptop nhỏ (dưới 1024px) */
+@media (max-width: 1024px) {
+    .hero-title {
+        font-size: 3.5rem;
+    }
+
+    .food-circle-container {
+        width: 350px;
+        height: 350px;
+    }
+}
+
+/* Tablet Dọc & Mobile lớn (dưới 991px) */
+@media (max-width: 991px) {
+    .hero-section {
+        height: auto;
+        padding: 120px 0 80px 0;
+    }
+
+    .content-wrapper {
+        flex-direction: column-reverse;
+        /* Đảo ngược: Chữ dưới, Ảnh trên */
+        text-align: center;
+    }
+
+    .text-column {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-desc {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .food-circle-container {
+        width: 320px;
+        height: 320px;
+    }
+}
+
+/* Mobile (dưới 576px) */
+@media (max-width: 576px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .brand-badge {
+        font-size: 0.8rem;
+    }
+
+    .btn-gold {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .food-circle-container {
+        width: 260px;
+        height: 260px;
+    }
+
+    /* Tắt bớt hiệu ứng bay trên mobile yếu */
+    .floating-food {
+        animation: none;
+    }
+}
+/* --- CẬP NHẬT CSS TRONG HeroBanner.css --- */
+
+/* 1. Container bao bên ngoài: Chịu trách nhiệm "Bay lên xuống" */
+.food-circle-container {
+    position: relative;
+    width: 450px;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* CHUYỂN hiệu ứng bay (float) sang đây */
+    animation: float 4s ease-in-out infinite;
+}
+
+/* 2. Ảnh món ăn: Chịu trách nhiệm "Quay tròn" */
+.floating-food {
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    border-radius: 50%; /* Bo tròn ảnh */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5); /* Đổ bóng */
+    
+    /* THÊM hiệu ứng quay: 60s quay hết 1 vòng (quay chậm cho sang) */
+    animation: spinFood 60s linear infinite;
+}
+
+/* --- ĐỊNH NGHĨA KEYFRAMES (Nếu chưa có thì thêm vào cuối file) --- */
+
+/* Bay lên xuống */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Quay tròn 360 độ */
+@keyframes spinFood {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Vẫn giữ hiệu ứng xoay cho vòng vàng (gold-ring) nếu bạn muốn */
+.gold-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    border-radius: 50%;
+    /* Vòng vàng quay ngược chiều kim đồng hồ cho ảo diệu */
+    animation: spinFood 20s linear infinite reverse; 
+}
+
+/* --- RESPONSIVE (Giữ nguyên phần này ở cuối file của bạn) --- */
+@media (max-width: 576px) {
+    .food-circle-container {
+        width: 260px;
+        height: 260px;
+    }
+    /* Trên điện thoại yếu thì có thể tắt bớt quay nếu sợ lag, hoặc cứ để */
+}
+/* =========================================

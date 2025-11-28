@@ -1,0 +1,328 @@
+/* src/component/ProductCard/ProductCard.css */
+
+/* =========================================
+   1. CẤU TRÚC THẺ SẢN PHẨM (CARD)
+   ========================================= */
+.product-card {
+  background-color: #fff;
+  border-radius: 12px;
+  /* Bo góc mềm mại hơn */
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid #f0f0f0;
+  /* Viền nhẹ tạo độ sắc nét */
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  border-color: #e0e0e0;
+}
+
+/* Con trỏ chuột */
+.clickable,
+.btn-view-pdf,
+button {
+  cursor: pointer !important;
+}
+
+/* =========================================
+   2. ẢNH SẢN PHẨM (IMAGE)
+   ========================================= */
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  /* Tỉ lệ vuông 1:1 */
+  overflow: hidden;
+}
+
+.product-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+/* Zoom ảnh mượt mà khi hover */
+.image-wrapper:hover .product-image {
+  transform: scale(1.12);
+}
+
+/* Overlay đen mờ + Icon kính lúp */
+.hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  /* Mờ nhẹ hơn để vẫn thấy món ăn */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(2px);
+  /* Làm mờ nhẹ ảnh bên dưới */
+}
+
+.image-wrapper:hover .hover-overlay {
+  opacity: 1;
+}
+
+/* Icon zoom */
+.zoom-icon {
+  font-size: 2rem;
+  margin-bottom: 5px;
+  transform: scale(0.8);
+  transition: transform 0.3s;
+}
+
+.image-wrapper:hover .zoom-icon {
+  transform: scale(1);
+}
+
+/* Badge Best Seller (Nếu có dùng) */
+.badge-best-seller {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #dc3545;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  z-index: 2;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================================
+   3. NỘI DUNG TEXT (CONTENT)
+   ========================================= */
+.card-content {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  /* Căn đều trên dưới */
+}
+
+.product-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #2c3e50;
+  text-align: center;
+
+  /* Giới hạn 2 dòng */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.6rem;
+}
+
+/* Giá tiền */
+.product-price {
+  font-size: 1.25rem;
+  color: #d4af37;
+  /* Vàng Gold */
+  font-weight: 700;
+  text-align: center;
+  margin: 5px 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Nút PDF (Nếu có) */
+.pdf-button-container {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.btn-view-pdf {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border: 1px solid #d4af37;
+  color: #d4af37;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.btn-view-pdf:hover {
+  background: #d4af37;
+  color: white;
+}
+
+/* =========================================
+   4. MODAL PHÓNG TO (FIXED LỖI LỆCH)
+   ========================================= */
+
+.image-modal-overlay {
+  /* [QUAN TRỌNG] Ghim chặt 4 góc màn hình */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.85);
+  /* Đen đậm */
+  backdrop-filter: blur(8px);
+  /* Hiệu ứng làm mờ nền web phía sau cực đẹp */
+  z-index: 10000;
+  /* Cao hơn tất cả các thành phần khác */
+
+  /* Flexbox căn giữa tuyệt đối */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation: fadeInModal 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-image-container {
+  position: relative;
+  /* Đảm bảo container không bao giờ vượt quá màn hình */
+  width: auto;
+  max-width: 90%;
+  max-height: 90vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* Cho phép cuộn nếu nội dung quá dài trên màn hình bé */
+  overflow-y: auto;
+  padding: 10px;
+}
+
+/* Ảnh trong Modal */
+.modal-image-full {
+  display: block;
+  max-width: 100%;
+  max-height: 75vh;
+  /* Giới hạn chiều cao để chừa chỗ cho text */
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  /* Bóng đổ lớn tạo chiều sâu */
+  margin-bottom: 15px;
+}
+
+/* Text trong Modal */
+.modal-product-title {
+  color: #fff;
+  font-size: 1.6rem;
+  margin: 10px 0 5px 0;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.modal-product-price {
+  color: #ffd700;
+  /* Vàng sáng hơn cho nền đen */
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Nút đóng (X) */
+.close-modal-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 40px;
+  line-height: 40px;
+  cursor: pointer;
+  z-index: 10001;
+  transition: all 0.2s;
+}
+
+.close-modal-btn:hover {
+  color: #fff;
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* Animation */
+@keyframes fadeInModal {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 768px) {
+  .product-price {
+    font-size: 1.1rem;
+  }
+
+  .card-content {
+    padding: 10px;
+  }
+
+  /* Modal trên mobile */
+  .modal-image-full {
+    max-height: 60vh;
+    /* Thu nhỏ ảnh lại chút */
+    width: 100%;
+  }
+
+  .modal-product-title {
+    font-size: 1.3rem;
+    margin-top: 10px;
+  }
+
+  .close-modal-btn {
+    top: 15px;
+    right: 15px;
+    font-size: 30px;
+    background: rgba(0, 0, 0, 0.3);
+    /* Thêm nền mờ cho nút đóng dễ nhìn hơn */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}.image-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;       /* Ép chiều rộng bằng 100% màn hình thiết bị */
+  height: 100vh;      /* Ép chiều cao bằng 100% màn hình thiết bị */
+  background-color: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(5px);
+  z-index: 999999 !important; /* Thêm !important và số cực lớn */
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

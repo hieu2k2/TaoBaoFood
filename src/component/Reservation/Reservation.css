@@ -1,0 +1,86 @@
+/* src/component/Reservation/Reservation.css */
+
+.reservation-section {
+    position: relative;
+    /* Ảnh nền nhà hàng (mờ tối) */
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                      url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Tạo hiệu ứng Parallax (ảnh đứng yên khi cuộn) */
+    
+    padding: 80px 0 100px 0;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+
+/* Tiêu đề "Reservierung" */
+.res-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    color: #f8e79d; /* Màu vàng nhạt sang trọng */
+    margin-bottom: 30px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* Nút gọi điện màu vàng */
+.phone-btn-wrapper {
+    margin-bottom: 60px;
+}
+
+.btn-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #f8e79d; /* Nền vàng */
+    color: #000; /* Chữ đen */
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-decoration: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.btn-phone:hover {
+    transform: scale(1.05);
+    background-color: #fff; /* Hover thành trắng */
+    box-shadow: 0 10px 25px rgba(248, 231, 157, 0.4);
+}
+
+/* --- BẢN ĐỒ --- */
+.map-wrapper {
+    width: 90%; /* Chiều rộng bản đồ (nhỏ hơn màn hình chút) */
+    max-width: 1400px;
+    height: 400px; /* Chiều cao bản đồ */
+    margin: 0 auto;
+    border: 5px solid rgba(255, 255, 255, 0.1); /* Viền mờ bao quanh map */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.google-map {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    
+    /* MẸO: Biến bản đồ thành đen trắng cho ngầu giống mẫu */
+    filter: grayscale(100%) invert(0%); 
+    opacity: 0.9;
+    transition: all 0.5s;
+}
+
+/* Khi di chuột vào bản đồ thì nó hiện màu lại */
+.map-wrapper:hover .google-map {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .res-title { font-size: 2.5rem; }
+    .btn-phone { font-size: 1.2rem; padding: 12px 30px; }
+    .map-wrapper { height: 300px; width: 95%; }
+}

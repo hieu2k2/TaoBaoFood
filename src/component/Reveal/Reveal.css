@@ -1,0 +1,13 @@
+/* src/component/Reveal/Reveal.css */
+
+.reveal-wrapper {
+    opacity: 0; /* Mặc định ẩn */
+    transform: translateY(80px); /* Đẩy xuống dưới 80px */
+    transition: all 1s ease-out; /* Thời gian hiện lên là 1 giây */
+}
+
+/* Khi có class 'active' thì hiện lên */
+.reveal-wrapper.active {
+    opacity: 1;
+    transform: translateY(0); /* Trở về vị trí cũ */
+}

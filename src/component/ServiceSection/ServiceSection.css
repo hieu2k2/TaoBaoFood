@@ -1,0 +1,109 @@
+/* src/component/ServiceSection/ServiceSection.css */
+
+.service-section {
+    /* Màu nền đen xanh đậm (giống phần trên) */
+    background-color: #050c12; 
+    /* Tạo hiệu ứng nền tối có đốm sáng nhẹ ở giữa cho giống vân đá */
+    background-image: radial-gradient(circle at center, #0f1c29 0%, #050c12 70%);
+    
+    color: #fff;
+    padding: 80px 20px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* --- PHẦN TIÊU ĐỀ --- */
+.service-label {
+    color: #d4af37; /* Màu vàng kim */
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.service-title {
+    font-family: 'Playfair Display', serif; /* Font có chân sang trọng */
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.service-desc {
+    color: #ccc;
+    max-width: 700px;
+    margin: 0 auto 60px auto; /* Căn giữa và đẩy các vòng tròn xuống */
+    line-height: 1.6;
+}
+
+/* --- LƯỚI 4 VÒNG TRÒN --- */
+.service-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Khoảng cách giữa các vòng tròn */
+    flex-wrap: wrap; /* Tự xuống dòng trên màn hình nhỏ */
+}
+
+/* Khung tròn từng dịch vụ */
+.service-item {
+    width: 280px;  /* Kích thước vòng tròn */
+    height: 280px;
+    border-radius: 50%; /* Làm tròn tuyệt đối */
+    border: 2px solid #d4af37; /* Viền vàng */
+    
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hiệu ứng khi rê chuột vào vòng tròn */
+.service-item:hover {
+    transform: scale(1.05); /* Phóng to nhẹ */
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); /* Phát sáng vàng */
+}
+
+/* Ảnh nền bên trong vòng tròn */
+.service-bg {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    /* Làm tối ảnh đi để chữ trắng nổi lên */
+    filter: brightness(0.6); 
+    transition: filter 0.3s;
+}
+
+.service-item:hover .service-bg {
+    filter: brightness(0.4); /* Tối hơn chút khi hover */
+}
+
+/* Nội dung chữ bên trong vòng tròn */
+.service-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Căn giữa tuyệt đối */
+    width: 80%;
+    z-index: 2;
+}
+
+.item-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-family: 'Playfair Display', serif;
+}
+
+.item-desc {
+    font-size: 0.9rem;
+    color: #ddd;
+    line-height: 1.4;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .service-title { font-size: 2rem; }
+    .service-item { width: 250px; height: 250px; margin-bottom: 20px; }
+}

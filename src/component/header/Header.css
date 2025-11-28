@@ -1,0 +1,123 @@
+.custom-navbar {
+    background-color: transparent !important; /* Nền trong suốt */
+    padding: 15px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+/* --- 1. LOGO & CHỮ MENU (MÀU VÀNG GOLD -> HOVER TRẮNG) --- */
+
+/* Logo TAOBAO */
+.logo {
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin: 0;
+    color: #ff0000; /* Đã đổi sang Vàng Gold */
+    transition: color 0.3s ease;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Thêm bóng đổ nhẹ cho dễ đọc */
+}
+
+/* Hover vào Logo */
+.navbar-brand:hover .logo {
+    color: #ffffff; /* Chuyển thành Trắng */
+}
+
+/* Các link menu (Trang chủ, Menu...) */
+.navbar-nav .nav-link {
+    color: #ff0000 !important; /* Đã đổi sang Vàng Gold */
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-left: 15px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5); /* Thêm bóng đổ nhẹ */
+}
+
+/* Hover vào link menu */
+.navbar-nav .nav-link:hover {
+    color: #ffffff !important; /* Chuyển thành Trắng */
+}
+
+/* --- 2. NÚT 3 GẠCH TRÊN MOBILE (MÀU VÀNG) --- */
+
+.navbar-toggler {
+    border-color: rgba(212, 175, 55, 0.5) !important; /* Viền mờ màu Vàng */
+    outline: none;
+    box-shadow: none !important;
+}
+
+/* Chỉnh màu 3 gạch thành màu VÀNG */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(212, 175, 55, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+/* Khi bấm mở menu trên mobile */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background-color: rgba(0, 0, 0, 0.95); /* Nền menu tối hẳn để làm nổi chữ vàng */
+        padding: 20px;
+        margin-top: 10px;
+        border-radius: 8px;
+        border: 1px solid #d4af37; /* Viền vàng sang trọng */
+    }
+}
+
+/* --- 3. LOADING SPINNER (TRẮNG - ĐEN) --- */
+
+.loading-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85); /* Nền tối mờ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999; /* Luôn nằm trên cùng */
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    
+    /* Vòng tròn nền màu ĐEN */
+    border: 6px solid #000000; 
+    
+    /* Phần xoay màu TRẮNG */
+    border-top: 6px solid #ffffff; 
+    
+    animation: spin 1s linear infinite;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+/* Header.css */
+
+/* Class cơ bản của Navbar */
+.custom-navbar {
+    transition: transform 0.3s ease-in-out; /* Hiệu ứng trượt trong 0.3s */
+    background-color: white; /* Đảm bảo nền màu trắng (hoặc màu bạn chọn) */
+    /* Giữ nguyên các thuộc tính cũ của bạn ở đây... */
+}
+
+/* Khi hiện: nằm đúng vị trí (top: 0) */
+.nav-visible {
+    transform: translateY(0);
+}
+
+/* Khi ẩn: trượt lên trên (-100% chiều cao của nó) */
+.nav-hidden {
+    transform: translateY(-100%);
+}
+
+/* --- Khắc phục lỗi Mobile --- */
+/* Khi mở menu mobile, navbar KHÔNG ĐƯỢC ẨN dù có cuộn trang */
+/* Nếu không, người dùng đang chọn menu mà lỡ tay quẹt nhẹ là mất menu */
+@media (max-width: 991px) {
+    .navbar-collapse.show {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+}
