@@ -3,6 +3,7 @@ import React from 'react';
 import './ServiceSection.css';
 import khonggianquan from '../../assets/Menu/khonggianquan.jpg';
 import Phobo from '../../assets/Menu/10 Pho Bo.jpg';
+import AnhMeo from '../../assets/Menu/anhmei.jpg';
 import Monkethop from '../../assets/Menu/monkethop.png';
 // Dữ liệu cho 4 vòng tròn (Bạn thay link ảnh thật vào đây nhé)
 const servicesData = [
@@ -28,7 +29,7 @@ const servicesData = [
         id: 4,
         title: "Bedienung",
         desc: "Freundlich und professionell.",
-        image: "https://images.unsplash.com/photo-1581349485608-9469926a8e5e?q=80&w=1964&auto=format&fit=crop" // Ảnh nhân viên/đồ uống
+        image: AnhMeo
     }
 ];
 
