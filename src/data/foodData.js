@@ -97,7 +97,7 @@ export const foodList = [{
     price: "12,90 €",
     options: [{
         id: "A",
-        label: "TOFU",
+        label: "Tofu",
         price: "10,50 €"
       },
       {
@@ -131,49 +131,252 @@ export const foodList = [{
     name: "Udon Miso",
     category: 'mipho',
     image: UdonMiso,
-    price: "12,90 €"
+    price: "12,90 €",options: [{
+        id: "A",
+        label: "Tofu",
+        price: "10,50 €"
+      },
+      {
+        id: "B",
+        label: "Hühnerfleisch",
+        price: "10,90 €"
+      },
+      {
+        id: "C",
+        label: "Garnelen",
+        price: "12,90 €"
+      },
+      {
+        id: "D",
+        label: "Panierte Ente",
+        price: "12,90 €"
+      },{
+        id: "E",
+        label: "Rindfleisch",
+        price: "11,50 €"
+      },
+      {
+        id: "F",
+        label: "Knuspring gebackenes",
+        price: "11,50 €"
+      },
+    ]
   },
   {
     id: 16,
     name: "Udon Feuer",
     category: 'mipho',
     image: UdonFeuer,
-    price: "12,90 €"
+    price: "12,90 €",options: [{
+        id: "A",
+        label: "Tofu",
+        price: "10,50 €"
+      },
+      {
+        id: "B",
+        label: "Hühnerfleisch",
+        price: "10,90 €"
+      },
+      {
+        id: "C",
+        label: "Garnelen",
+        price: "12,90 €"
+      },
+      {
+        id: "D",
+        label: "Panierte Ente",
+        price: "12,90 €"
+      },{
+        id: "E",
+        label: "Rindfleisch",
+        price: "11,50 €"
+      },
+      {
+        id: "F",
+        label: "Knuspring gebackenes",
+        price: "11,50 €"
+      },
+    ]
   },
   {
     id: 17,
     name: "UdonTraumCurry",
     category: 'mipho',
     image: UdonTraumCurry,
-    price: "10,50 €"
+    price: "10,50 €",options: [{
+        id: "A",
+        label: "Tofu",
+        price: "10,50 €"
+      },
+      {
+        id: "B",
+        label: "Hühnerfleisch",
+        price: "10,90 €"
+      },
+      {
+        id: "C",
+        label: "Garnelen",
+        price: "12,90 €"
+      },
+      {
+        id: "D",
+        label: "Panierte Ente",
+        price: "12,90 €"
+      },{
+        id: "E",
+        label: "Rindfleisch",
+        price: "11,50 €"
+      },
+      {
+        id: "F",
+        label: "Knuspring gebackenes",
+        price: "11,50 €"
+      },
+    ]
   },
   {
     id: 18,
     name: "Tokyo Udon",
     category: 'mipho',
     image: TokyoUdon,
-    price: "11,50 €"
+    price: "11,50 €",options: [{
+        id: "A",
+        label: "Tofu",
+        price: "10,50 €"
+      },
+      {
+        id: "B",
+        label: "Hühnerfleisch",
+        price: "10,90 €"
+      },
+      {
+        id: "C",
+        label: "Garnelen",
+        price: "12,90 €"
+      },
+      {
+        id: "D",
+        label: "Panierte Ente",
+        price: "12,90 €"
+      },{
+        id: "E",
+        label: "Rindfleisch",
+        price: "11,50 €"
+      },
+      {
+        id: "F",
+        label: "Knuspring gebackenes",
+        price: "11,50 €"
+      },
+    ]
   },
   {
     id: 19,
     name: "Mango Tango",
     category: 'rice',
     image: MangoTango,
-    price: "10,90 €"
+    price: "10,90 €",options: [{
+        id: "A",
+        label: "Tofu",
+        price: "10,50 €"
+      },
+      {
+        id: "B",
+        label: "Hühnerfleisch",
+        price: "10,90 €"
+      },
+      {
+        id: "C",
+        label: "Garnelen",
+        price: "12,90 €"
+      },
+      {
+        id: "D",
+        label: "Panierte Ente",
+        price: "12,90 €"
+      },{
+        id: "E",
+        label: "Rindfleisch",
+        price: "11,50 €"
+      },
+      {
+        id: "F",
+        label: "Knuspring gebackenes",
+        price: "11,50 €"
+      },
+    ]
   },
   {
     id: 20,
     name: "Erdnuss Curry Lover",
     category: 'rice',
     image: ErdnussCurryLover,
-    price: "12,90 €"
+    price: "12,90 €",options: [{
+        id: "A",
+        label: "Tofu",
+        price: "10,50 €"
+      },
+      {
+        id: "B",
+        label: "Hühnerfleisch",
+        price: "10,90 €"
+      },
+      {
+        id: "C",
+        label: "Garnelen",
+        price: "12,90 €"
+      },
+      {
+        id: "D",
+        label: "Panierte Ente",
+        price: "12,90 €"
+      },{
+        id: "E",
+        label: "Rindfleisch",
+        price: "11,50 €"
+      },
+      {
+        id: "F",
+        label: "Knuspring gebackenes",
+        price: "11,50 €"
+      },
+    ]
   },
   {
     id: 21,
     name: "Red Surprise",
     category: 'rice',
     image: RedSurprise,
-    price: "11,50 €"
+    price: "11,50 €",options: [{
+        id: "A",
+        label: "Tofu",
+        price: "10,50 €"
+      },
+      {
+        id: "B",
+        label: "Hühnerfleisch",
+        price: "10,90 €"
+      },
+      {
+        id: "C",
+        label: "Garnelen",
+        price: "12,90 €"
+      },
+      {
+        id: "D",
+        label: "Panierte Ente",
+        price: "12,90 €"
+      },{
+        id: "E",
+        label: "Rindfleisch",
+        price: "11,50 €"
+      },
+      {
+        id: "F",
+        label: "Knuspring gebackenes",
+        price: "11,50 €"
+      },
+    ]
   },
   {
     id: 22,
@@ -208,7 +411,36 @@ export const foodList = [{
     name: "Chili Alibaba",
     category: 'rice',
     image: ChiliAlibaba,
-    price: "12,90 €"
+    price: "12,90 €",options: [{
+        id: "A",
+        label: "Tofu",
+        price: "10,50 €"
+      },
+      {
+        id: "B",
+        label: "Hühnerfleisch",
+        price: "10,90 €"
+      },
+      {
+        id: "C",
+        label: "Garnelen",
+        price: "12,90 €"
+      },
+      {
+        id: "D",
+        label: "Panierte Ente",
+        price: "12,90 €"
+      },{
+        id: "E",
+        label: "Rindfleisch",
+        price: "11,50 €"
+      },
+      {
+        id: "F",
+        label: "Knuspring gebackenes",
+        price: "11,50 €"
+      },
+    ]
   },
   {
     id: 27,

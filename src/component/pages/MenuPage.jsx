@@ -1,12 +1,16 @@
-import React, { useState } from 'react'; // Bỏ useEffect đi, không cần nữa
+import React, { useState } from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 import { foodList, categories } from '../../data/foodData';
+import { FaFilePdf } from 'react-icons/fa'; // Import Icon PDF cho đẹp
 import './MenuPage.css';
+
+// --- IMPORT FILE PDF CỦA BẠN ---
+import pdfFile from '../../assets/Menu/taobao-web.pdf'; // Đảm bảo đường dẫn đúng
 
 const MenuPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false); // Mặc định là false
+  const [isLoading, setIsLoading] = useState(false);
   const itemsPerPage = 8;
 
   // --- LOGIC TÍNH TOÁN (Giữ nguyên) ---
@@ -19,8 +23,7 @@ const MenuPage = () => {
   const currentItems = filteredProducts.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
-  // --- HÀM XỬ LÝ SỰ KIỆN (SỬA Ở ĐÂY) ---
-
+  // --- HÀM XỬ LÝ SỰ KIỆN ---
   const handleCategoryChange = (catId) => {
     setIsLoading(true);
     setSelectedCategory(catId);
@@ -28,26 +31,39 @@ const MenuPage = () => {
 
     setTimeout(() => {
       setIsLoading(false);
-      // THÊM DÒNG NÀY: Cuộn lên đầu trang mượt mà
       window.scrollTo({ top: 0, behavior: 'smooth' }); 
     }, 700);
   };
 
-  // 2. Hàm khi bấm chuyển trang
   const paginate = (pageNumber) => {
     setIsLoading(true);
     setCurrentPage(pageNumber);
     
     setTimeout(() => {
       setIsLoading(false);
-      // THÊM DÒNG NÀY: Cuộn lên đầu trang mượt mà
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 700);
   };
 
   return (
     <div className="main-content container">
-      <h2 className="page-title text-center text-danger fw-bold my-4">SPEISEKARTE</h2>
+      
+      {/* --- [MỚI] KHUNG CHỨA TIÊU ĐỀ & NÚT PDF --- */}
+      <div className="page-header-container">
+        <h2 className="page-title text-center text-danger fw-bold">SPEISEKARTE</h2>
+        
+        {/* Nút PDF nằm góc phải */}
+        <a 
+          href={pdfFile} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="btn-pdf-header"
+        >
+          <FaFilePdf size={18} /> 
+          <span>PDF Menu</span>
+        </a>
+      </div>
+      {/* ------------------------------------------- */}
 
       {/* Category Bar */}
       <div className="category-wrapper">
@@ -64,15 +80,13 @@ const MenuPage = () => {
         </div>
       </div>
 
-      {/* --- PHẦN HIỂN THỊ CÓ ĐIỀU KIỆN --- */}
+      {/* --- PHẦN HIỂN THỊ SẢN PHẨM (Giữ nguyên) --- */}
       {isLoading ? (
-        // Hiển thị Spinner
         <div className="loading-container">
           <div className="spinner"></div>
           <p className="loading-text">Lädt...</p>
         </div>
       ) : (
-        // Hiển thị Sản phẩm
         <div className="product-grid fade-in">
           {currentItems.length > 0 ? (
             currentItems.map(product => (
@@ -87,31 +101,11 @@ const MenuPage = () => {
       {/* Phân trang */}
       {!isLoading && totalPages > 1 && (
         <div className="pagination-container">
-          <button
-            onClick={() => paginate(currentPage - 1)}
-            disabled={currentPage === 1}
-            className="page-btn prev-btn"
-          >
-            &laquo;
-          </button>
-
+          <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1} className="page-btn prev-btn">&laquo;</button>
           {[...Array(totalPages)].map((_, index) => (
-            <button
-              key={index + 1}
-              onClick={() => paginate(index + 1)}
-              className={`page-btn ${currentPage === index + 1 ? 'active' : ''}`}
-            >
-              {index + 1}
-            </button>
+            <button key={index + 1} onClick={() => paginate(index + 1)} className={`page-btn ${currentPage === index + 1 ? 'active' : ''}`}>{index + 1}</button>
           ))}
-
-          <button
-            onClick={() => paginate(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className="page-btn next-btn"
-          >
-            &raquo;
-          </button>
+          <button onClick={() => paginate(currentPage + 1)} disabled={currentPage === totalPages} className="page-btn next-btn">&raquo;</button>
         </div>
       )}
     </div>

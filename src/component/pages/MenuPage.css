@@ -5,13 +5,23 @@
   padding: 40px 15px;
   max-width: 1200px;
   margin: 0 auto;
-  min-height: 80vh; /* Đảm bảo chiều cao tối thiểu */
-  background-color: #fdfdfd; /* Màu nền trắng ngà nhẹ cho dịu mắt */
+  min-height: 80vh;
+  background-color: #fdfdfd;
+}
+
+/* Container chứa Tiêu đề + Nút PDF */
+.page-header-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  padding-top: 10px;
 }
 
 /* Tiêu đề trang */
 .page-title {
-  margin-bottom: 40px;
+  margin: 0;
   text-transform: uppercase;
   letter-spacing: 2px;
   color: #2c3e50;
@@ -19,7 +29,6 @@
   padding-bottom: 15px;
 }
 
-/* Đường gạch chân trang trí dưới tiêu đề */
 .page-title::after {
   content: '';
   position: absolute;
@@ -28,15 +37,62 @@
   transform: translateX(-50%);
   width: 60px;
   height: 4px;
-  background-color: #d32f2f; /* Đỏ sang trọng */
+  background-color: #d32f2f;
   border-radius: 2px;
+}
+
+/* NÚT PDF (PC: Nằm góc phải) */
+/* src/component/pages/MenuPage.css */
+
+.btn-pdf-header {
+  position: absolute;
+  right: 0;
+
+  /* 1. Đặt mốc ở giữa chiều cao khung chứa */
+  top: 50%;
+
+  /* 2. Dịch chuyển nút lên chính giữa tâm của nó */
+  transform: translateY(-50%);
+
+  /* 3. TINH CHỈNH CUỐI CÙNG (QUAN TRỌNG) */
+  /* Do tiêu đề có gạch chân bên dưới, nên tâm của khung bị thấp hơn tâm của chữ. */
+  /* -> Ta cần kéo nút LÊN một chút để cân với chữ. */
+
+  margin-top: 97px;
+  /* <--- BẠN CHỈNH SỐ NÀY */
+
+  /* HƯỚNG DẪN CHỈNH: */
+  /* - Nếu thấy nút vẫn THẤP hơn chữ: Sửa thành -10px hoặc -12px (số âm càng lớn càng lên cao) */
+  /* - Nếu thấy nút CAO hơn chữ: Sửa thành -5px hoặc 0px */
+
+  /* --- Các phần giao diện khác giữ nguyên --- */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #bb313f;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.btn-pdf-header:hover {
+  background-color: #b71c1c;
+  transform: translateY(-50%) translateY(-9px) scale(1.05);
+  box-shadow: 0 6px 12px rgba(220, 53, 69, 0.3);
+  color: white;
 }
 
 /* --- 2. THANH DANH MỤC (CATEGORY BAR) --- */
 .category-wrapper {
   margin-bottom: 40px;
   width: 100%;
-  padding: 5px 0 15px 0; 
+  padding: 5px 0 15px 0;
 }
 
 .category-bar {
@@ -51,33 +107,31 @@
   border: 1px solid #e0e0e0;
   background: #ffffff;
   color: #555;
-  border-radius: 50px; /* Bo tròn hoàn toàn */
+  border-radius: 50px;
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Bóng nhẹ */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   white-space: nowrap;
 }
 
-/* Hiệu ứng khi di chuột vào danh mục */
 .category-btn:hover {
   border-color: #d32f2f;
   color: #d32f2f;
-  transform: translateY(-2px); /* Nhấc nhẹ nút lên */
+  transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(211, 47, 47, 0.15);
 }
 
-/* Trạng thái đang chọn (Active) */
 .category-btn.active {
-  background: linear-gradient(135deg, #d32f2f, #b71c1c); /* Màu gradient đỏ */
+  background: linear-gradient(135deg, #d32f2f, #b71c1c);
   color: white;
   border-color: transparent;
-  box-shadow: 0 4px 15px rgba(211, 47, 47, 0.4); /* Bóng đổ đỏ phát sáng */
-  transform: scale(1.05); /* Phóng to nhẹ */
+  box-shadow: 0 4px 15px rgba(211, 47, 47, 0.4);
+  transform: scale(1.05);
 }
 
-/* --- 3. LOADING SPINNER (HIỆN ĐẠI) --- */
+/* --- 3. LOADING SPINNER --- */
 .loading-container {
   display: flex;
   flex-direction: column;
@@ -105,36 +159,45 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
+
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
-/* --- 4. GRID SẢN PHẨM --- */
+/* --- 4. GRID SẢN PHẨM (MẶC ĐỊNH PC > 1024px) --- */
 .product-grid {
   display: grid;
-  /* Grid thông minh: tự động co giãn */
+  /* Mặc định tự động chia cột cho màn hình to */
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   gap: 30px;
   padding-bottom: 20px;
 }
 
-/* Hiệu ứng Fade-in khi load xong */
 .fade-in {
   animation: slideUpFade 0.6s ease-out forwards;
 }
 
 @keyframes slideUpFade {
-  from { 
-    opacity: 0; 
-    transform: translateY(20px); 
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -159,13 +222,13 @@
   cursor: pointer;
   font-weight: 700;
   color: #333;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
   font-size: 16px;
 }
 
 .page-btn:hover:not(:disabled) {
-  background-color: #ffebee; /* Hồng nhạt */
+  background-color: #ffebee;
   color: #d32f2f;
   transform: translateY(-2px);
 }
@@ -184,63 +247,90 @@
 }
 
 /* ========================================================
-   6. MOBILE RESPONSIVE (ĐÃ SỬA LỖI ĐÈ HEADER & GỌN GÀNG)
+   6. RESPONSIVE QUY ĐỊNH CỘT (TABLET & MOBILE)
    ======================================================== */
+
+/* --- TABLET (Màn hình từ 769px đến 1024px) --- */
+/* Yêu cầu: 3 sản phẩm 1 hàng */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+    /* Ép cứng 3 cột */
+    gap: 20px;
+  }
+}
+
+/* --- MOBILE (Màn hình nhỏ hơn 768px) --- */
+/* Yêu cầu: 1 sản phẩm 1 hàng */
 @media (max-width: 768px) {
-  
+
   .main-content {
-    /* [SỬA LỖI 1]: Tăng padding top và margin top để đẩy nội dung xuống */
-    /* Tránh bị cái Header (Menu) phía trên che mất tiêu đề */
-    padding: 30px 15px 20px 15px; 
-    margin-top: 50px; /* <--- Điều chỉnh số này nếu Header của bạn cao hơn */
+    padding: 30px 15px 20px 15px;
+    margin-top: 40px;
   }
 
-  .page-title {
-    font-size: 22px; /* Giảm cỡ chữ chút cho cân đối mobile */
+  /* 1. Sắp xếp Header dọc */
+  .page-header-container {
+    flex-direction: column;
+    gap: 15px;
     margin-bottom: 25px;
   }
 
-  /* [SỬA LỖI 2]: Category gọn gàng, tràn viền màn hình */
+  .page-title {
+    font-size: 22px;
+    padding-bottom: 10px;
+  }
+
+  /* 2. Nút PDF trên Mobile: Về giữa, không bay nữa */
+  .btn-pdf-header {
+    position: static;
+    /* Hủy absolute */
+    transform: none;
+    /* Hủy transform căn giữa cũ */
+    width: auto;
+    font-size: 13px;
+    padding: 8px 20px;
+    margin-top: 0;
+  }
+
+  /* 3. Category trượt ngang */
   .category-wrapper {
-    /* Kỹ thuật negative margin: Kéo giãn ra sát mép màn hình */
-    margin-left: -15px; 
+    margin-left: -15px;
     margin-right: -15px;
     width: auto;
     margin-bottom: 30px;
   }
 
   .category-bar {
-    justify-content: flex-start; /* Căn trái để vuốt từ đầu */
-    flex-wrap: nowrap;           /* Bắt buộc 1 dòng ngang */
-    overflow-x: auto;            /* Cho phép cuộn */
-    gap: 10px;                   /* Khoảng cách giữa các nút */
-    
-    /* Padding 2 đầu để nút đầu tiên không dính sát lề trái */
-    padding: 0 15px 10px 15px; 
-
-    /* Ẩn thanh cuộn xấu xí */
-    -webkit-overflow-scrolling: touch; 
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 0 15px 10px 15px;
+    -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
-  
+
   .category-bar::-webkit-scrollbar {
-    display: none; 
+    display: none;
   }
 
   .category-btn {
-    flex: 0 0 auto; /* Giữ nguyên kích thước chữ, không bị ép nhỏ */
+    flex: 0 0 auto;
     padding: 8px 16px;
     font-size: 13px;
     border-radius: 20px;
   }
 
-  /* --- Mobile Grid (2 cột) --- */
+  /* 4. GRID MOBILE: 1 CỘT DUY NHẤT */
   .product-grid {
-    gap: 12px; /* Khoảng cách nhỏ lại cho đỡ tốn diện tích */
-    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px;
+    /* Tăng khoảng cách chút cho thoáng */
+    grid-template-columns: 1fr;
+    /* 1 Cột */
   }
 
-  /* --- Mobile Pagination --- */
+  /* 5. Pagination Mobile */
   .pagination-container {
     margin-top: 30px;
     gap: 5px;
@@ -250,12 +340,5 @@
     width: 36px;
     height: 36px;
     font-size: 14px;
-  }
-}
-
-/* Với màn hình rất nhỏ (như iPhone 5/SE cũ) thì về 1 cột */
-@media (max-width: 360px) {
-  .product-grid {
-    grid-template-columns: 1fr;
   }
 }

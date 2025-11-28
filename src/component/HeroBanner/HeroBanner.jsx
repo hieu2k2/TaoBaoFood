@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // <--- 1. IMPORT CÁI NÀY
 import './HeroBanner.css';
 
-// --- 1. IMPORT FILE PDF ---
-// (Đảm bảo tên file 'thucdonpdf.pdf' đúng với file trong máy bạn)
-import pdfFile from '../../assets/Menu/taobao-web.pdf';
+// --- (BỎ IMPORT PDF VÌ KHÔNG DÙNG NỮA) ---
+// import pdfFile from '../../assets/Menu/taobao-web.pdf'; 
 
 // --- 2. IMPORT ẢNH TỪ ASSETS ---
 import bgImage1 from '../../assets/Menu/10 Pho Bo.jpg';
@@ -33,7 +33,10 @@ const foodImage = dishImage;
 
 const HeroBanner = () => {
     const [index, setIndex] = useState(0);
-    const [isLoading, setIsLoading] = useState(false); // State quản lý loading
+    const [isLoading, setIsLoading] = useState(false);
+    
+    // 2. KHAI BÁO HOOK CHUYỂN TRANG
+    const navigate = useNavigate(); 
 
     // Tự động đổi ảnh nền sau 4 giây
     useEffect(() => {
@@ -43,24 +46,23 @@ const HeroBanner = () => {
         return () => clearInterval(timer);
     }, []);
 
-    // --- HÀM XỬ LÝ MỞ PDF CÓ LOADING ---
-    const handleOpenPdf = () => {
-        setIsLoading(true); // 1. Hiện màn hình đen
+    // --- HÀM XỬ LÝ CHUYỂN TRANG MENU ---
+    const handleViewMenu = () => {
+        setIsLoading(true); // 1. Hiện màn hình đen (Loading)
 
-        // 2. Đợi 2.5 giây chạy hiệu ứng
+        // 2. Đợi chút cho hiệu ứng chạy
         setTimeout(() => {
-            // 3. Mở file PDF trong tab mới
-            window.open(pdfFile, '_blank');
-
-            // 4. Tắt loading (để khi người dùng quay lại tab này thì thấy web bình thường)
-            setIsLoading(false);
-        }, 2500);
+            // 3. Chuyển sang trang Menu (Giả sử đường dẫn là /menu)
+            navigate('/menu'); 
+            
+            // Không cần setIsLoading(false) vì khi chuyển trang component này sẽ tự mất
+        }, 1500); // Giảm xuống 1.5s cho nhanh, khách đỡ phải chờ lâu
     };
 
     return (
         <section className="hero-section">
 
-            {/* --- PHẦN HIỆU ỨNG LOADING (Màn trập) --- */}
+            {/* --- PHẦN HIỆU ỨNG LOADING --- */}
             {isLoading && (
                 <div className="page-transition-overlay">
                     <div className="transition-content">
@@ -94,10 +96,10 @@ const HeroBanner = () => {
                             Erleben Sie die kulinarische Feinheit der östlichen Küche in einem eleganten Ambiente.
                         </p>
 
-                        {/* --- NÚT BẤM GỌI HÀM LOADING --- */}
+                        {/* --- SỬA SỰ KIỆN ONCLICK --- */}
                         <button
                             className="btn-gold"
-                            onClick={handleOpenPdf}
+                            onClick={handleViewMenu}
                         >
                             Speisekarte
                         </button>
