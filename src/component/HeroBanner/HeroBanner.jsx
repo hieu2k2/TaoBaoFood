@@ -3,12 +3,12 @@ import './HeroBanner.css';
 
 // --- 1. IMPORT FILE PDF ---
 // (Đảm bảo tên file 'thucdonpdf.pdf' đúng với file trong máy bạn)
-import pdfFile from '../../assets/Menu/thucdonpdf.pdf'; 
+import pdfFile from '../../assets/Menu/taobao-web.pdf';
 
 // --- 2. IMPORT ẢNH TỪ ASSETS ---
 import bgImage1 from '../../assets/Menu/10 Pho Bo.jpg';
 import bgImage2 from '../../assets/Menu/11 Pho Ga.jpg';
-import dishImage from '../../assets/Menu/12 Pad Thai.jpg'; 
+import dishImage from '../../assets/Menu/12 Pad Thai.jpg';
 import UdonMiso from '../../assets/Menu/13 Udon Miso.jpg';
 import UdonFeuer from '../../assets/Menu/16 Udon Feuer.jpg';
 import UdonTraumCurry from '../../assets/Menu/17 UdonTraumCurry.jpg';
@@ -39,7 +39,7 @@ const HeroBanner = () => {
     useEffect(() => {
         const timer = setInterval(() => {
             setIndex((prev) => (prev + 1) % backgroundImages.length);
-        }, 4000); 
+        }, 4000);
         return () => clearInterval(timer);
     }, []);
 
@@ -51,15 +51,15 @@ const HeroBanner = () => {
         setTimeout(() => {
             // 3. Mở file PDF trong tab mới
             window.open(pdfFile, '_blank');
-            
+
             // 4. Tắt loading (để khi người dùng quay lại tab này thì thấy web bình thường)
             setIsLoading(false);
-        }, 2500); 
+        }, 2500);
     };
 
     return (
         <section className="hero-section">
-            
+
             {/* --- PHẦN HIỆU ỨNG LOADING (Màn trập) --- */}
             {isLoading && (
                 <div className="page-transition-overlay">
@@ -93,10 +93,10 @@ const HeroBanner = () => {
                         <p className="hero-desc">
                             Erleben Sie die kulinarische Feinheit der östlichen Küche in einem eleganten Ambiente.
                         </p>
-                        
+
                         {/* --- NÚT BẤM GỌI HÀM LOADING --- */}
-                        <button 
-                            className="btn-gold" 
+                        <button
+                            className="btn-gold"
                             onClick={handleOpenPdf}
                         >
                             Speisekarte
