@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom'; // <--- 1. Thêm dòng này
+import ReactDOM from 'react-dom'; 
 import { FaSearchPlus, FaTimes, FaFilePdf } from 'react-icons/fa';
 import './ProductCard.css';
 
 function ProductCard({ product }) {
   const [showModal, setShowModal] = useState(false);
+
+  // STATE LỰA CHỌN:
+  // Nếu món có options -> Mặc định chọn cái đầu tiên (index 0)
+  // Nếu không -> null
+  const [selectedOption, setSelectedOption] = useState(
+    product.options && product.options.length > 0 ? product.options[0] : null
+  );
 
   const openModal = () => setShowModal(true);
   
@@ -13,7 +20,25 @@ function ProductCard({ product }) {
     setShowModal(false);
   }
 
-  // Nội dung của Modal
+  // Hàm xử lý khi khách chọn A, B, C...
+  const handleOptionChange = (e) => {
+    e.stopPropagation(); // Chặn click lan ra ngoài
+    const optionId = e.target.value;
+    const newOption = product.options.find(opt => opt.id === optionId);
+    setSelectedOption(newOption);
+  };
+
+  // Tính toán giá để hiển thị:
+  // Có option thì lấy giá của option, không thì lấy giá gốc
+  const currentPrice = selectedOption ? selectedOption.price : product.price;
+  
+  // Tính toán tên để hiển thị trong Modal (kèm option nếu có)
+  const modalTitle = selectedOption 
+    ? `${product.name} (${selectedOption.label})` 
+    : product.name;
+
+  // Nội dung Modal (Được đưa ra ngoài bằng Portal)
+  // Nội dung Modal
   const modalContent = (
     <div className="image-modal-overlay" onClick={closeModal}>
       <span className="close-modal-btn" onClick={closeModal}>
@@ -21,8 +46,13 @@ function ProductCard({ product }) {
       </span>
       <div className="modal-image-container" onClick={(e) => e.stopPropagation()}>
          <img src={product.image} alt={product.name} className="modal-image-full" />
-         <h4 className="modal-product-title">{product.name}</h4>
-         {product.price && <p className="modal-product-price">{product.price}</p>}
+         
+         {/* --- SỬA Ở ĐÂY: Dùng modalTitle thay vì product.name --- */}
+         <h4 className="modal-product-title">{modalTitle}</h4> 
+         
+         {/* Nếu đã dùng modalTitle rồi thì có thể bỏ đoạn <p> hiển thị label bên dưới đi cho đỡ lặp lại, hoặc giữ nguyên tùy bạn */}
+         
+         {currentPrice && <p className="modal-product-price">{currentPrice}</p>}
       </div>
     </div>
   );
@@ -30,7 +60,7 @@ function ProductCard({ product }) {
   return (
     <>
       <div className="product-card">
-        {/* ... (Giữ nguyên phần hiển thị Card như cũ) ... */}
+        {/* --- 1. ẢNH SẢN PHẨM --- */}
         <div className="image-wrapper clickable" onClick={openModal}>
           <img src={product.image} alt={product.name} className="product-image" />
           {product.sold > 100 && <span className="badge-best-seller">Hot</span>}
@@ -40,9 +70,31 @@ function ProductCard({ product }) {
           </div>
         </div>
 
+        {/* --- 2. NỘI DUNG & OPTIONS --- */}
         <div className="card-content">
           <h3 className="product-title text-center">{product.name}</h3>
-          {product.price && <p className="product-price">{product.price}</p>}
+          
+          {/* [LOGIC MỚI] Menu thả xuống chọn A, B, C */}
+          {product.options && (
+            <div className="option-selector">
+              <select 
+                className="custom-select" 
+                value={selectedOption.id}
+                onChange={handleOptionChange}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {product.options.map(opt => (
+                  <option key={opt.id} value={opt.id}>
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          {/* Hiển thị giá (Giá sẽ thay đổi khi chọn option) */}
+          {currentPrice && <p className="product-price">{currentPrice}</p>}
+          
           {product.pdfUrl && (
             <div className="pdf-button-container">
               <a href={product.pdfUrl} target="_blank" rel="noopener noreferrer" className="btn-view-pdf" onClick={(e) => e.stopPropagation()}>
@@ -53,10 +105,10 @@ function ProductCard({ product }) {
         </div>
       </div>
 
-      {/* --- 2. SỬA ĐOẠN NÀY: Dùng Portal để đưa Modal ra ngoài --- */}
+      {/* --- 3. PORTAL MODAL --- */}
       {showModal && ReactDOM.createPortal(
         modalContent,
-        document.body // Gắn modal thẳng vào thẻ body của HTML
+        document.body 
       )}
     </>
   );

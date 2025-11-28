@@ -45,7 +45,7 @@ export const foodList = [{
     name: "Crispy Vegan Mini Frühlingsrollen",
     category: 'nem',
     image: CrispyVeganMiniFrühlingsrollen,
-    price: "3,20 €"
+    price: " 3,20 €",
   },
   {
     id: 2,
@@ -94,7 +94,37 @@ export const foodList = [{
     name: "Pad Thai",
     category: 'mipho',
     image: PadThai,
-    price: "12,90 €"
+    price: "12,90 €",
+    options: [{
+        id: "A",
+        label: "TOFU",
+        price: "10,50 €"
+      },
+      {
+        id: "B",
+        label: "Hühnerfleisch",
+        price: "10,90 €"
+      },
+      {
+        id: "C",
+        label: "Garnelen",
+        price: "12,90 €"
+      },
+      {
+        id: "D",
+        label: "Panierte Ente",
+        price: "12,90 €"
+      },{
+        id: "E",
+        label: "Rindfleisch",
+        price: "11,50 €"
+      },
+      {
+        id: "F",
+        label: "Knuspring gebackenes",
+        price: "11,50 €"
+      },
+    ]
   },
   {
     id: 13,
